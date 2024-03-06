@@ -7,6 +7,9 @@
   <li><a href="https://github.com/EnekoAR"> Eneko ARBELBIDE</li>
   <li><a href="https://github.com/KyllM"> Killian MORANCE</li>
 </ul>
+<p>
+  Vinylog est développé dans un cadre universitaire et est donc proteger par le droit d'auteur.
+</p>
 <h1>Présentation du projet</h1>
 <p> Une application web regroupant les vinyles de tout types,<br>
 Enseigner et donner des conseils sur les bonnes pratiques d’entretien / utilisation,<br>
