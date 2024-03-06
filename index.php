@@ -23,6 +23,7 @@ $cds = afficher();
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />    
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -119,71 +120,103 @@ $cds = afficher();
       .form-control::placeholder {
         color: #333; 
       }
-
+      #menu-complet {
+            width: 100%;
+            padding: 20px; /* Vous pouvez ajuster la valeur du padding selon vos besoins */
+        }
     </style>
-
-    
   </head>
-  <body>
-    
-
-
-
-
-
+<body>
   
-<header data-bs-theme="dark">
+
+  <header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-orange navbar-height">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+          </li>
+        </ul>
+        </div>
+      </div>
+</nav>
 
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-orange navbar-height">
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a href="index.php">
+      <img src="./img/logo.png" width="120" height="120" style="margin-right: 20px;">
+    </a>
+  <div id="menu-complet">
+    <div class="container-fluid">
+      <form class="d-flex flex-grow-1 me-4" role="search">
+        <div style="max-width: 550px;" class="input-group">
+          <input class="form-control form-control-sm me-1 bg-light text-dark" type="search" placeholder="Rechercher un vinyle ou un artiste">
+          <button class="btn btn-outline-success" type="submit">Rechercher</button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item me-3">
+                <a class="nav-link text-dark" href="">Compte</a>
+            </li>
+            <li class="nav-item me-3">
+                <a class="nav-link text-dark" href="">Favoris</a>
+            </li>
+            <li class="nav-item me-3">
+                <a class="nav-link text-dark" href="">Panier</a>
+            </li>
+        </ul>
+    </div>
+  </form>
+</div>
+
+
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-
+    <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-    </div>
-
-  </div>
-</nav>
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="container-fluid">
-    <a href="#" class="navbar-brand me-4">
-      <img src="./img/logo.png" width="100" height="100" style="margin-right: 20px;">
-    </a>
-
-    <form class="d-flex flex-grow-1 me-4 " role="search">
-  <input class="form-control me-1 flex-grow-1 bg-light text-dark" type="search" placeholder="Rechercher un vinyle ou un artiste">
-  <button class="btn btn-outline-success" type="submit">Rechercher</button>
-</form>
-
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item me-3">
-          <a class="nav-link text-dark" href="#">Compte</a>
-        </li>
-        <li class="nav-item me-3">
-          <a class="nav-link text-dark" href="#">Favoris</a>
-        </li>
-        <li class="nav-item me-3">
-          <a class="nav-link text-dark" href="#">Panier</a>
-        </li>
-      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
 
+  </div>
+</nav>
 
-
-
+</div>
 
 
 </header>
@@ -192,74 +225,31 @@ $cds = afficher();
 
 <div class="vinyles-heading">
 
-        <h1 class="special-font">Vinyles</h1>
+      <h1 class="special-font">Vinyles</h1>
     </div>
 
   <div class="album py-5">
     <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-      
-
-      <?php foreach ($cds as $cd): ?>
-    <div class="col">
-        <div class="card shadow-sm">
-            <title><?= $cd->nomCD ?></title>
-            <img src="<?= $cd->imagePochette ?>" alt="">
-            <div class="card-body">
-                <p class="card-text"><strong><?= $cd->nomCD ?></p>
-                <p><?= $cd->alias ?></p>
-                <?= $cd->dateSortie ?></p></strong>
-                <div class="d-flex justify-content-between align-items-center">
-                    <form method="post">
-                        <input type="hidden" name="IDcd" value="<?= $cd->IDcd ?>">
-                        <input type="hidden" name="nomCD" value="<?= $cd->nomCD ?>">
-                        <input type="hidden" name="dateSortie" value="<?= $cd->dateSortie ?>">
-                        <input type="hidden" name="imagePochette" value="<?= $cd->imagePochette ?>">
-                        <input type="hidden" name="prix" value="<?= $cd->prix ?>">
-                        <button type="submit" class="btn btn-sm btn-outline-secondary" name="acheter">Acheter (panier)</button>
-                    </form>
-                    <small class="text-body-secondary"><?= $cd->prix ?> €</small>
+        <?php foreach ($cds as $cd): ?>
+            <div class="col">
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <title><?= $cd->Nom ?></title>
+                    <img src="<?= $cd->url ?>" class="card-img-top" alt="<?= $cd->Nom ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $cd->nomVinyle ?></h5>
+                        <h6 class="card-title"><?= $cd->Nom ?></h6>
+                        <span class="material-symbols-outlined" style="position: absolute; bottom: 10px; right: 10px;  font-size: 30px;">favorite</span>
+                      </div>
                 </div>
             </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-
-
-
-<?php
-if (isset($_POST['acheter'])) {
-    if (
-        isset($_POST['IDcd']) &&
-        isset($_POST['nomCD']) &&
-        isset($_POST['dateSortie']) &&
-        isset($_POST['imagePochette']) &&
-        isset($_POST['prix'])
-    ) {
-        try {
-            $IDcdAjout = $_POST['IDcd'];
-            $nomCdAjout = $_POST['nomCD'];
-            $dateSortieAjout = $_POST['dateSortie'];
-            $imagePochetteAjout = $_POST['imagePochette'];
-            $prixAjout = $_POST['prix'];
-
-            ajouterPanier($IDcdAjout, $nomCdAjout, $dateSortieAjout, $imagePochetteAjout, $prixAjout);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-}
-
-?>
-
-
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
 
+  
 
 </main>
     </body>

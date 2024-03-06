@@ -129,7 +129,7 @@ function supprimerPanier($IDcdpanier){
 function afficher(){
     $data = [];
     if(require("connection.php")){
-        $req = $access->prepare("SELECT * FROM Vinyle JOIN Artiste ON Vinyle.IdVinyle = Artiste.Idartiste");
+        $req = $access->prepare("SELECT Vinyle.Nom AS nomVinyle, IMAGE.url, Artiste.Nom FROM Vinyle JOIN Illustrer ON Vinyle.IdVinyle = Illustrer.IdVinyle JOIN IMAGE ON Illustrer.IdImage = IMAGE.IdImage JOIN Artiste on Vinyle.IdArtiste = Artiste.IdArtiste");
 
         $req->execute();
 
