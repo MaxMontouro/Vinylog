@@ -165,4 +165,48 @@ function viderPanier(){
 }
 
 
+
+
+
+// --------------- Fonctions page d'accueil --------------------
+
+
+// affichage des vinyles
+function carrouselVinyle(){
+    $data = [];
+    if(require("connection.php")){
+        // Modifier la BD pour avoir les images liées aux vinyle dans Illustrer (insertions)
+        $req = $access->prepare("SELECT IdVinyle FROM Vinyle ORDER BY Annee DESC LIMIT 6");
+
+        $req->execute();
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+    return $data;
+}
+
+
+// affichage des artises
+function carrouselArtiste(){
+    $data = [];
+    if(require("connection.php")){
+        // Modifier la BD pour avoir les images liées aux vinyle dans Illustrer (insertions)
+        $req = $access->prepare("SELECT IdArtiste FROM Artiste ORDER BY RAND () DESC LIMIT 6");
+
+        $req->execute();
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+    return $data;
+}
+
+
 ?>

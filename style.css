@@ -90,10 +90,83 @@
     padding-left: 65px;
     color: #39245F;
   }
+
   .form-control::placeholder {
     color: #333; 
   }
+
   #menu-complet {
         width: 100%;
-        padding: 20px; /* Vous pouvez ajuster la valeur du padding selon vos besoins */
+        padding: 20px;
+  }
+
+
+  /* -------------------- Page d'accueil -------------------- */
+
+  .special-font-categories {
+    font-family: 'Hammersmith One';
+    font-weight: bold;
+    color: #A8518A;
+  }
+
+
+
+  /* -------- Carousel --------- */
+
+  .carousel-inner .carousel-item.active,
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+      display: flex;
+  }
+
+  /* Petits écrans */
+  @media (max-width: 767px) {
+      .carousel-inner .carousel-item > div {
+          display: none;
+      }
+      .carousel-inner .carousel-item > div:first-child {
+          display: block;
+      }
+  }
+
+  /* Grands écrans */
+  @media (min-width: 768px) {
+
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
     }
+
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+  }
+
+
+  .carousel-inner .carousel-item-end,
+  .carousel-inner .carousel-item-start { 
+    transform: translateX(0);
+  }
+
+
+  .carousel-control-prev{
+    filter: invert(100%);
+    left: -10%;
+  }
+  .carousel-control-next{
+    filter: invert(100%);
+    right: -10%;
+  }
+
+  .mt-6 {
+      margin-top: 4rem;
+  }
+
+  .col-sm-2-5 {
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      width: 23%;
+  }
