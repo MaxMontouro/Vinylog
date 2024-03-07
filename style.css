@@ -170,3 +170,25 @@
       padding-left: 15px;
       width: 23%;
   }
+
+
+    /* -------------------- Page produit -------------------- */
+
+    .select-image {
+      cursor: pointer;
+    }
+    
+    .select-image:hover {
+      opacity: 0.7;
+    }
+  
+    .special-font-details {
+      padding-left: 80px;
+      padding-top: 10px;
+    }
+  
+    .special-font-description {
+      padding-top: 4rem;
+      padding-left: 20px;
+    }
+  
