@@ -176,7 +176,7 @@ function carrouselVinyle(){
     $data = [];
     if(require("connection.php")){
         // Modifier la BD pour avoir les images liées aux vinyle dans Illustrer (insertions)
-        $req = $access->prepare("SELECT IdVinyle FROM Vinyle ORDER BY Annee DESC LIMIT 6");
+        $req = $access->prepare("SELECT V.IdVinyle, V.Nom AS VNom, A.Nom AS ANom  FROM Vinyle V JOIN Artiste A ON V.IdArtiste = A.IdArtiste ORDER BY Annee DESC LIMIT 6");
 
         $req->execute();
 
@@ -195,7 +195,7 @@ function carrouselArtiste(){
     $data = [];
     if(require("connection.php")){
         // Modifier la BD pour avoir les images liées aux vinyle dans Illustrer (insertions)
-        $req = $access->prepare("SELECT IdArtiste FROM Artiste ORDER BY RAND () DESC LIMIT 6");
+        $req = $access->prepare("SELECT IdArtiste, Nom FROM Artiste ORDER BY RAND () DESC LIMIT 6");
 
         $req->execute();
 

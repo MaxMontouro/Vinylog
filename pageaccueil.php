@@ -1,7 +1,6 @@
 <?php
 require("config/commandes.php");
 
-$cds = afficher();
 
 ?>
 
@@ -124,10 +123,8 @@ $cds = afficher();
 
     <main>
 
+
     <!-- Carrousel nouveautés -->
-
-
-
 
 
 
@@ -143,7 +140,11 @@ $cds = afficher();
 
             $data = carrouselVinyle();
 
-            foreach ($data as $vinyle) { 
+            foreach ($data as $vinyle) {
+              
+              $idUrlVinyle = array( 
+                'vinyle' => $vinyle->IdVinyle
+              );
                 
             ?>
 
@@ -151,25 +152,32 @@ $cds = afficher();
 
             <div class="carousel-item active justify-content-center">
               <div class="col-sm-2-5">
-                <div class="card">
-                  <div class="card-img">
-                      <img src="./img/pochettes/<?php echo $vinyle->IdVinyle?>.png" class="img-fluid">
+                <a href="pagevinyle.php?<?php echo http_build_query($idUrlVinyle, '', '&')?>">
+                  <div class="card">
+                    <div class="card-img">
+                        <img src="./img/pochettes/<?php echo $vinyle->IdVinyle?>.png" class="img-fluid">
+                    </div>
+                    <div class="card-text mt-2 text-center">
+                      <h5 class="card-title"><?php echo utf8_encode($vinyle->VNom)?></h5>
+                      <p><?php echo utf8_encode($vinyle->ANom)?></p>
+                    </div>
                   </div>
-                  <div class="card-img-overlay">Slide <?php echo $vinyle->IdVinyle?></div>
-                </div>
+                </a>
               </div>
+              
+              
             </div>
 
             <?php } ?>
 
           </div>
 
-          <a class="carousel-control-prev bg-transparent w-aut" href="#CarrouselNouveautes" role="button" data-bs-slide="prev">
+          <button class="carousel-control-prev bg-transparent w-aut" href="#CarrouselNouveautes" role="button" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-          <a class="carousel-control-next bg-transparent w-aut" href="#CarrouselNouveautes" role="button" data-bs-slide="next">
+            </button>
+          <button class="carousel-control-next bg-transparent w-aut" href="#CarrouselNouveautes" role="button" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
+            </button>
         </div>
       </div>
     </div>
@@ -196,33 +204,41 @@ $cds = afficher();
 
             $data = carrouselArtiste();
 
-            foreach ($data as $artiste) { 
+            foreach ($data as $artiste) {
+
+              $idUrlArtiste = array( 
+                'artiste' => $artiste->IdArtiste
+              ); 
                 
             ?>
 
-
-
             <div class="carousel-item active justify-content-center">
               <div class="col-sm-2-5">
-                <div class="card">
-                  <div class="card-img">
-                      <img src="./img/artistes/<?php echo $artiste->IdArtiste?>.png" class="img-fluid">
+                <a href="pageartiste.php?<?php echo http_build_query($idUrlArtiste, '', '&')?>">
+                  <div class="card">
+                    <div class="card-img">
+                        <img src="./img/pochettes/<?php echo $artiste->IdArtiste?>.png" class="img-fluid">
+                    </div>
+                    <div class="card-text mt-2 text-center">
+                      <h5 class="card-title"><?php echo utf8_encode($artiste->Nom)?></h5>
+                    </div>
                   </div>
-                  <div class="card-img-overlay">Slide <?php echo $artiste->IdArtiste?></div>
-                </div>
+                </a>
               </div>
+              
+              
             </div>
 
             <?php } ?>
 
           </div>
 
-          <a class="carousel-control-prev bg-transparent w-aut" href="#CarrouselArtistes" role="button" data-bs-slide="prev">
+          <button class="carousel-control-prev bg-transparent w-aut" href="#CarrouselArtistes" role="button" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-          <a class="carousel-control-next bg-transparent w-aut" href="#CarrouselArtistes" role="button" data-bs-slide="next">
+            </button>
+          <button class="carousel-control-next bg-transparent w-aut" href="#CarrouselArtistes" role="button" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
+            </button>
         </div>
       </div>
     </div>
