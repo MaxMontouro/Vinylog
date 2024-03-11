@@ -260,4 +260,42 @@ function infoVinyle($idVinyle){
 }
 
 
+
+// --------------- Fonctions page favoris --------------------
+
+
+// obtention des infos pour la page vinyle
+function favorisUtilisateur($idUtilisaetur){
+    $data = [];
+    if(require("connection.php")){
+        $req = $access->prepare("SELECT Vinyle.IdVinyle, Vinyle.Nom AS NomVinyle, Artiste.Nom AS NomArtiste
+                                 FROM Favori
+                                 JOIN Vinyle ON Favori.IdVinyle = Vinyle.IdVinyle
+                                 JOIN Artiste ON Vinyle.IdArtiste = Artiste.IdArtiste
+                                 WHERE Favori.IdUtilisateur = '$idUtilisaetur';");
+    
+        $req->execute();
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+
+    if(!empty($data)) {
+        array_walk(
+            $data[0],
+            function (&$entry) {
+                $entry = mb_convert_encoding($entry, 'UTF-8', 'ISO-8859-1');
+            }
+        );
+    }
+    else return false;
+
+
+    return $data;
+}
+
+
 ?>
