@@ -26,6 +26,12 @@ $cds = afficher();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />    
 
     <link rel="stylesheet" href="./style.css">
+    <style>
+      .card {
+    width: 250px; /* Largeur fixe pour toutes les cartes */
+    height: 350px; /* Hauteur fixe pour toutes les cartes */
+}
+      </style>
   </head>
 <body>
   
