@@ -24,13 +24,33 @@ $cds = afficher();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />    
-
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styleFooter.css">
+
     <style>
       .card {
     width: 250px; /* Largeur fixe pour toutes les cartes */
     height: 350px; /* Hauteur fixe pour toutes les cartes */
 }
+.favorite-icon {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        position: relative;
+    }
+
+    .favorite-icon img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .favorite-icon[data-favorite="true"] img {
+        transform: scale(0.8); /* Réduire légèrement la taille de l'image pour donner un effet visuel */
+    }
+
       </style>
   </head>
 <body>
@@ -182,11 +202,33 @@ $cds = afficher();
             <div class="card-body">
                 <h5 class="card-title"><?= $cd->nomVinyle ?></h5>
                 <h6 class="card-title"><?= $cd->Nom ?></h6>
-                <span class="material-symbols-outlined" style="position: absolute; bottom: 10px; right: 10px;  font-size: 30px;">favorite</span>
+                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;" data-favorite="false">
+                    <img src="./img/favWhite.png">
+                </button>
             </div>
         </div>
     </div>
 <?php endforeach; ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+        favoriteIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                if (icon.getAttribute('data-favorite') === 'false') {
+                    icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+                    icon.setAttribute('data-favorite', 'true');
+                } else {
+                    icon.querySelector('img').src = './img/favWhite.png'; // Changer l'image en blanc
+                    icon.setAttribute('data-favorite', 'false');
+                }
+            });
+        });
+    });
+</script>
+
+
 
 
             </div>
@@ -197,7 +239,42 @@ $cds = afficher();
   </div>
 </main>
 
-
+<footer>
+  <div class="rowF">
+      <div class="colF">
+          <img src="img/logoWhite.png" class="logoF">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate facere minus voluptatibus sunt inventore perspiciatis! Quis illo eum suscipit quibusdam, sapiente commodi quam, facere non vero beatae quasi ratione omnis.</p>
+      </div>
+      <div class="colF">
+          <h3>BLABLA <div class="underline"><span></span></div></h3>
+          <p>blaaaaaaaaaaa</p>
+          <p>Bayonne, France</p>
+          <p>200 a2sa2s 56a5s</p>
+          <p class="email-id">Vinylog64@gmail.com</p>
+      </div>
+      <div class="colF">
+          <h3>Liens<div class="underline"><span></span></h3>
+          <ul>
+              <li><a href="pageaccueil.php">Accueil</a></li>
+              <li><a href="poldeconf.html">Politique de confidentialité</a></li>
+              <li><a href="">A propos</a></li>
+              <li><a href="">Contacts</a></li>
+          </ul>
+      </div>
+      <div class="colF">
+          <h3>Newsletter <div class="underline"><span></span></h3>
+          <form class="test">
+              <i class="fa-regular fa-envelope" style="width: 30px;"></i><input type="email" placeholder="Entrer votre email">
+              <button type="submit"><i class="fa-solid fa-share"></i></button>
+          </form>
+          <div class="social-icons">
+              <i class="fa-brands fa-github" onclick=""></i>
+          </div>
+      </div>
+  </div>
+  <hr>
+  <p class="copyright"copyright>Copyright 2024 © Vinylog. Tout droit réservés.</p>
+</footer>
 
     </body>
 </html>
