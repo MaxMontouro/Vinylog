@@ -209,4 +209,55 @@ function carrouselArtiste(){
 }
 
 
+// --------------- Fonctions page vinyle --------------------
+
+
+// obtention des infos pour la page vinyle
+function infoVinyle($idVinyle){
+    $data = [];
+    if(require("connection.php")){
+        $req = $access->prepare("SELECT
+                                    v.*,
+                                    a.Nom AS ArtisteNom,
+                                    GROUP_CONCAT(DISTINCT g.Nom SEPARATOR ', ') AS Genres,
+                                    GROUP_CONCAT(DISTINCT t.Nom SEPARATOR ', ') AS Tags
+                                FROM
+                                    Vinyle v
+                                LEFT JOIN
+                                    Artiste a ON v.IdArtiste = a.IdArtiste
+                                LEFT JOIN
+                                    Caracteriser c ON v.IdVinyle = c.IdVinyle
+                                LEFT JOIN
+                                    Genre g ON c.IdGenre = g.IdGenre
+                                LEFT JOIN
+                                    Preciser p ON v.IdVinyle = p.IdVinyle
+                                LEFT JOIN
+                                    Tag t ON p.IdTag = t.IdTag
+                                WHERE
+                                    v.IdVinyle = $idVinyle
+                                GROUP BY
+                                    v.IdVinyle;");
+    
+
+        $req->execute();
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+
+    array_walk(
+        $data[0],
+        function (&$entry) {
+            $entry = mb_convert_encoding($entry, 'UTF-8', 'ISO-8859-1');
+        }
+    );
+
+
+    return $data;
+}
+
+
 ?>

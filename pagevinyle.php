@@ -1,7 +1,13 @@
 <?php
 require("config/commandes.php");
 
-$cds = afficher();
+if (isset($_GET['vinyle'])) {
+  $idVinyle = $_GET['vinyle'];
+}
+else {
+  header("Location: pageaccueil.php");
+  exit();
+}
 
 ?>
 
@@ -123,6 +129,9 @@ $cds = afficher();
 
 
     <main>
+
+      <?php $vinyle = infoVinyle($idVinyle)[0]; ?>
+
       <div>
         <div class="container">
           <div class="row">
@@ -158,25 +167,18 @@ $cds = afficher();
               
             </div>
             <div class="col">
-              <h1 class="special-font">Michael Jackson – Thriller</h1>
+              <h1 class="special-font"><?php echo $vinyle->ArtisteNom . " - " . $vinyle->Nom ?></h1>
 
-              <h5 class="special-font-details" style="padding-top: 3rem">Artiste : Michael Jackson</h5>
-              <h5 class="special-font-details">Genre : Funk / Soul, Pop</h5>
-              <h5 class="special-font-details">Année : 1982</h5>
-              <h5 class="special-font-details">Tags : Contemporary R&B, Disco, Soul</h5>
+              <h5 class="special-font-details" style="padding-top: 3rem">Artiste : <a href="e"><?php echo $vinyle->ArtisteNom ?></a></h5>
+              <h5 class="special-font-details">Genres : <?php echo $vinyle->Genres ?></h5>
+              <h5 class="special-font-details">Année : <?php echo $vinyle->Annee ?></h5>
+              <h5 class="special-font-details">Label : <?php echo $vinyle->Label ?></h5>
+              <h5 class="special-font-details">Tags : <?php echo $vinyle->Tags ?></h5>
 
               <p class="special-font-description">
-                USA 1st / early pressings do not list Michael Jackson as a co-producer on the back cover under the 
-                "Produced by Quincy Jones..." credit (example: Thriller). Later pressings add "Co-Produced by Michael Jackson" 
-                (examples: Thriller and Thriller). Every song of the LP, excluding "The Lady In My Life", either charted in the
-                Billboard Top 100 or was issued as an A-side or B-side on 45 RPM singles. It was released on November 30, 1982 as
-                the follow-up to Jackson's 1979 critically and highly commercially successful "Off The Wall" LP. "Thriller" explores
-                similar genres to those that were heard on "Off the Wall" but redefined pop music, R&B, rock, post-disco, funk, and
-                even adult contemporary music. It currently remains the largest grossing LP and represents the most copies ever sold
-                of one LP worldwide, with sales over 65 million copies according to various sources. Recording sessions took place
-                between April and November 1982 at Westlake Studios in Los Angeles, California, with a production budget of $750,000,
-                assisted by producer Quincy Jones.
+                <?php echo $vinyle->Description ?>
               </p>
+
             </div>
 
           </div>
