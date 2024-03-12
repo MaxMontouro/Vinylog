@@ -110,7 +110,7 @@ function afficherPanier(){
         $req->closeCursor();
 
     }
-    return $data;
+    return json_encode($data);
 }
 
 // supprimer le cd du panier
@@ -167,11 +167,13 @@ function viderPanier(){
 
 //recherche erreur
 function rechercherBD(){
+    $data = [];
     if(require("connection.php")){
         $reqVinyle = $access->prepare("SELECT * FROM Vinyle");
 
         $data = $req->fetchAll(PDO::FETCH_OBJ);
 
+        echo $data;
 
         $req->closeCursor();
 

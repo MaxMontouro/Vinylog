@@ -11,7 +11,7 @@
 //INCLUSION DES FICHIERS JS
 import { Mot } from "./Mot.js";
 import { dictionnaireJSON } from "./Donnee.js";
-
+import {$data} from "./index.php";
 
 
 //------------------------------------
@@ -24,13 +24,13 @@ export class Main {
     }
 
     init() {
+            
+        console.log($data);
             console.log("Bienvenue dans le projet Vinylog");
             console.log("---------------------------------------------------");
             console.log("---------------------------------------------");
     
-            const formulaire = document.getElementById("demonstration-form");
-            formulaire.addEventListener("submit", async (event) => {
-                event.preventDefault();
+            preventDefault();
                 //initialisation des variables
                 const motElement = document.getElementById("mot");
                 const motComplet = motElement.value.trim();

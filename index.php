@@ -3,6 +3,7 @@ require("config/commandes.php");
 
 $cds = afficher();
 
+$data = rechercherBd();
 ?>
 
 
@@ -27,7 +28,10 @@ $cds = afficher();
 
     <link rel="stylesheet" href="./style.css">
 
-    <script src = "./src/Main.js" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "./src/Main.js" type="module">
+      export {$data};
+    </script>
   </head>
 <body>
   
