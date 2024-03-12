@@ -165,7 +165,19 @@ function viderPanier(){
 }
 
 
+//recherche erreur
+function rechercherBD(){
+    if(require("connection.php")){
+        $reqVinyle = $access->prepare("SELECT * FROM Vinyle");
 
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+    return $data;
+}
 
 
 // --------------- Fonctions page d'accueil --------------------

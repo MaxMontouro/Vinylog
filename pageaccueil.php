@@ -22,7 +22,7 @@ require("config/commandes.php");
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />    
     <link rel="stylesheet" href="./style.css">
-
+    <script src = "./src/Main.js"></script>
     
   </head>
 
@@ -60,7 +60,7 @@ require("config/commandes.php");
               <form class="d-flex flex-grow-1 me-4" role="search">
                 <div style="max-width: 550px;" class="input-group">
                   <input class="form-control form-control-sm me-1 bg-light text-dark" type="search" placeholder="Rechercher un vinyle ou un artiste">
-                  <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                  <button class="btn btn-outline-success" type="submit" onclick="">Rechercher</button>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ms-auto">
