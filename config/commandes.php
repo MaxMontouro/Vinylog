@@ -129,7 +129,7 @@ function supprimerPanier($IDcdpanier){
 function afficher(){
     $data = [];
     if(require("connection.php")){
-        $req = $access->prepare("SELECT Vinyle.Nom AS nomVinyle, IMAGE.url, Artiste.Nom FROM Vinyle JOIN Illustrer ON Vinyle.IdVinyle = Illustrer.IdVinyle JOIN IMAGE ON Illustrer.IdImage = IMAGE.IdImage JOIN Artiste on Vinyle.IdArtiste = Artiste.IdArtiste");
+        $req = $access->prepare("SELECT Vinyle.Nom AS nomVinyle, Vinyle.IdVinyle, IMAGE.url, Artiste.Nom FROM Vinyle JOIN Illustrer ON Vinyle.IdVinyle = Illustrer.IdVinyle JOIN IMAGE ON Illustrer.IdImage = IMAGE.IdImage JOIN Artiste on Vinyle.IdArtiste = Artiste.IdArtiste");
 
         $req->execute();
 
@@ -261,10 +261,53 @@ function infoVinyle($idVinyle){
 
 
 
-// --------------- Fonctions page favoris --------------------
+// --------------- Fonctions favoris --------------------
 
 
-// obtention des infos pour la page vinyle
+function ajouterFavori($idVinyle)
+{
+    $idUtilisateur = 'Utilisateur'; // A CHANGER
+    if(require("connection.php")){
+        $req = $access->prepare('INSERT INTO Favori (IdUtilisateur, IdVinyle) VALUES (?, ?)');
+        $req->execute([$idUtilisateur, $idVinyle]);
+        $req->closeCursor();
+    }
+}
+
+function retirerFavori($idVinyle)
+{
+    $idUtilisateur = 'Utilisateur'; // A CHANGER
+    if (require("connection.php")) {
+        $req = $access->prepare('DELETE FROM Favori WHERE IdUtilisateur = ? AND IdVinyle = ?');
+        $req->execute([$idUtilisateur, $idVinyle]);
+        $req->closeCursor();
+    }
+}
+
+
+// Action si l'utilisateur ajoute ou retire un favori
+
+if (isset($_GET['action'])) {
+    $parametre = $_GET['action'];
+    $tabParametre = explode("-", $parametre);
+
+    if (isset($tabParametre[0]) && $tabParametre[0] == "ajoutVinyleFav") {
+        ajouterFavori($tabParametre[1]);
+        exit;
+    }
+
+    if (isset($tabParametre[0]) && $tabParametre[0] == "retirerVinyleFav") {
+        retirerFavori($tabParametre[1]);
+        exit;
+    }
+}
+
+
+
+
+
+
+// Obtention des infos pour la page favoris
 function favorisUtilisateur($idUtilisaetur){
     $data = [];
     if(require("connection.php")){
@@ -275,12 +318,8 @@ function favorisUtilisateur($idUtilisaetur){
                                  WHERE Favori.IdUtilisateur = '$idUtilisaetur';");
     
         $req->execute();
-
         $data = $req->fetchAll(PDO::FETCH_OBJ);
-
-
         $req->closeCursor();
-
     }
 
     if(!empty($data)) {
@@ -292,7 +331,6 @@ function favorisUtilisateur($idUtilisaetur){
         );
     }
     else return false;
-
 
     return $data;
 }
