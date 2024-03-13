@@ -8,7 +8,7 @@ if(isset($_SESSION['test'])){
 
     header("Location: ../");
 } else{
-    header("Location: ../login.php");
+    header("Location: ../vinyles.php");
 }
 
 

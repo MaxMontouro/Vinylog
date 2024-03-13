@@ -63,11 +63,9 @@ $cds = afficher();
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">IDcd</th>
-      <th scope="col">imagePochette</th>
-      <th scope="col">nomCD</th>
-      <th scope="col">dateSortie</th>
-      <th scope="col">prix</th>
+      <th scope="col">IdVinyle</th>
+      <th scope="col">nomVinyle</th>
+      <th scope="col">Nom</th>
     </tr>
   </thead>
   <tbody>
