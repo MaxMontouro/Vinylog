@@ -209,7 +209,7 @@ function carrouselArtiste(){
     $data = [];
     if(require("connection.php")){
         // Modifier la BD pour avoir les images liées aux vinyle dans Illustrer (insertions)
-        $req = $access->prepare("SELECT IdArtiste, Nom FROM Artiste ORDER BY RAND () DESC LIMIT 6");
+        $req = $access->prepare("SELECT IdArtiste, Nom FROM Artiste WHERE IdArtiste < 14 ORDER BY RAND () DESC LIMIT 6");
 
         $req->execute();
 
