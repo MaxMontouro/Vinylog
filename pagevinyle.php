@@ -130,18 +130,24 @@ else {
 
     <main>
 
-      <?php $vinyle = infoVinyle($idVinyle)[0]; ?>
+      <?php $vinyle = infoVinyle($idVinyle)[0];
+
+      $favoris = favorisUtilisateur('Utilisateur'); // ID A CHANGER
+      $idsVinyle = array_column($favoris, 'IdVinyle');
+
+      
+      ?>
 
       <div>
         <div class="container">
           <div class="row">
             <div class="col-md-4">
               <!-- Image principale du produit -->
-              <img src="./img/logo.png" id="main-product-image" class="img-fluid" alt="Image du produit">
+              <img src="./img/pochettes/<?php echo $vinyle->IdVinyle?>.png" id="main-product-image" class="img-fluid" alt="Image du produit">
               <!-- Sélecteur d'images -->
               <div class="row mt-3 justify-content-md-center">
                 <div class="col-2">
-                  <img src="./img/logo.png" class="img-fluid img-thumbnail select-image" alt="Image 1" onclick="changeImage(this)">
+                  <img src="./img/pochettes/<?php echo $vinyle->IdVinyle?>.png" class="img-fluid img-thumbnail select-image" alt="Image 1" onclick="changeImage(this)">
                 </div>
                 <div class="col-2">
                   <img src="https://fakeimg.pl/500x500?text=2&font=museo" class="img-fluid img-thumbnail select-image" alt="Image 2" onclick="changeImage(this)">
@@ -162,8 +168,67 @@ else {
               </div>
               <div class="d-flex justify-content-center" style="margin-top: 2rem;">
                 <h4>Ajouter aux favoris</h4>
-                <span class="material-symbols-outlined" style="font-size: 40px; margin-left: 15px;">favorite</span>
+                <!--<span class="material-symbols-outlined" style="font-size: 40px; margin-left: 15px;">favorite</span>-->
+                <button class="material-symbols-outlined favorite-icon" style="margin-top: -8px; margin-left: 15px; font-size: 30px; cursor: pointer;"
+                data-favorite="<?= json_encode(in_array($vinyle->IdVinyle, $idsVinyle)); ?>" data-vinyle-id="<?= htmlspecialchars($vinyle->IdVinyle) ?>">
+                    <img src="./img/favWhite.png">
+                </button>
               </div>
+
+
+              <script>
+
+                 document.addEventListener("DOMContentLoaded", function() {
+                   const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+                  favoriteIcons.forEach(icon => {
+                    if (icon.getAttribute('data-favorite') === 'true') {
+                      icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+                    }
+
+
+                  });
+                });
+
+
+                document.addEventListener("DOMContentLoaded", function() {
+                  const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+                  favoriteIcons.forEach(icon => {
+                    icon.addEventListener('click', function() {
+                      const vinyleId = icon.getAttribute('data-vinyle-id'); 
+
+                      if (icon.getAttribute('data-favorite') === 'false') {
+                          icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+                          icon.setAttribute('data-favorite', 'true');
+
+                          fetch(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                          .catch(error => {
+                              console.error('Erreur:', error);
+                          });
+                          console.log("testvrai");
+
+                          console.log(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId));
+
+                          } else {
+                              icon.querySelector('img').src = './img/favWhite.png'; // Changer l'image en blanc
+                              icon.setAttribute('data-favorite', 'false');
+
+                              fetch(`./config/commandes.php?action=retirerVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                              .catch(error => {
+                                  console.error('Erreur:', error);
+                              });
+                          console.log("testfaux");
+                        }
+
+              
+        
+                    });
+                    });
+                });
+              </script>
               
             </div>
             <div class="col">

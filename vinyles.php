@@ -31,25 +31,8 @@ $cds = afficher();
       .card {
     width: 250px; /* Largeur fixe pour toutes les cartes */
     height: 350px; /* Hauteur fixe pour toutes les cartes */
-}
-.favorite-icon {
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        outline: none;
-        position: relative;
     }
 
-    .favorite-icon img {
-        width: 30px;
-        height: 30px;
-        transition: transform 0.3s ease;
-    }
-
-    .favorite-icon[data-favorite="true"] img {
-        transform: scale(0.8); /* Réduire légèrement la taille de l'image pour donner un effet visuel */
-    }
 
       </style>
   </head>
