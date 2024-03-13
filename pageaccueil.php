@@ -133,7 +133,10 @@ require("config/commandes.php");
 
             $data = carrouselVinyle();
 
+            $cpt = 0;
+
             foreach ($data as $vinyle) {
+              
               
               $idUrlVinyle = array( 
                 'vinyle' => $vinyle->IdVinyle
@@ -143,7 +146,8 @@ require("config/commandes.php");
 
 
 
-            <div class="carousel-item active justify-content-center">
+            <div class="carousel-item <?php if($cpt < 1){echo "active";
+              $cpt = $cpt + 1;}?> justify-content-center">
               <div class="col-sm-2-5">
                 <a href="pagevinyle.php?<?php echo http_build_query($idUrlVinyle, '', '&')?>">
                   <div class="card">
@@ -244,7 +248,11 @@ require("config/commandes.php");
       carousels.forEach((carousel) => {
         let items = carousel.querySelectorAll('.carousel-item');
 
+        carousel.style.transition = 'none';
+
         items.forEach((el) => {
+
+          el.style.transition = 'none';
           // number of slides per carousel-item
           const minPerSlide = 4;
           let next = el.nextElementSibling;
