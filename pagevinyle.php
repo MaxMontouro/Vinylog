@@ -72,7 +72,7 @@ else {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link text-dark" href="">Compte</a>
+                        <a class="nav-link text-dark" href="loginTest.php">Compte</a>
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link text-dark" href="">Favoris</a>
@@ -95,24 +95,16 @@ else {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link text-dark" aria-current="page" href="#">Accueil</a>
+                      <a class="nav-link text-dark" aria-current="page" href="pageaccueil.php">Accueil</a>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Vinyles
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Truc 1</a></li>
-                        <li><a class="dropdown-item" href="#">Truc 2</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      </ul>
+                    <li class="nav-item">
+                      <a class="nav-link text-dark" aria-current="page" href="vinyles.php">Vinyles</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link text-dark" aria-current="page" href="#">Ventes</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-dark" href="#">Conseil&Guide</a>
+                      <a class="nav-link text-dark" href="conseils.html">Conseil&Guide</a>
                     </li>
                   </ul>
                 </div>

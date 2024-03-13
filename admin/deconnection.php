@@ -6,7 +6,7 @@ if(isset($_SESSION['test'])){
 
     session_destroy();
 
-    header("Location: ../loginTest.php");
+    header("Location: ../pageaccueil.php");
 } else{
     header("Location: ../pageaccueil.php");
 }

@@ -100,7 +100,7 @@ session_start();
           <a class="nav-link text-dark" aria-current="page" href="#">Ventes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#">Conseil&Guide</a>
+          <a class="nav-link text-dark" href="conseils.html">Conseil&Guide</a>
         </li>
       </ul>
     </div>
