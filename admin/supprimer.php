@@ -3,10 +3,10 @@
 session_start();
 
 if(!isset($_SESSION['test'])){
-    header("Location: ../loginTest.php");
+    header("Location: ../login.php");
 }
 if(empty($_SESSION['test'])){
-    header("Location: ../loginTest.php");
+    header("Location: ../login.php");
 }
 
 
@@ -149,7 +149,6 @@ $cds = afficher();
     <label for="exampleInputEmail1" class="form-label">ID du CD</label>
     <input type="name" class="form-control" name ="idDuCd" required>
   </div>
-
   <button type="submit" name ="valider" class="btn btn-warning">Supprimer le CD</button>
 </form>
 
@@ -162,14 +161,13 @@ $cds = afficher();
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
-              <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><p><?= $cd->nomVinyle ?></p></strong>
+              <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><img src="<?= $cd->url ?>" style="width: 50%"><p><?= $cd->nomVinyle ?></p><p><?= $cd->Nom ?></p></strong>
               <div class="d-flex justify-content-between align-items-center">
               </div>
             </div>
           </div>
         </div>
       <?php endforeach; ?>
-
 </div>
 
 
