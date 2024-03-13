@@ -37,6 +37,26 @@ function getUser($nom, $prenom, $email, $motdepasse){
     }
 }
 
+function getUtilisateur($Nom, $Mdp){
+
+    if(require("connection.php"))
+    {
+        $req = $access->prepare("SELECT Utilisateur.Nom, Utilisateur.Mdp FROM Utilisateur WHERE Nom = ? AND Mdp = ?");
+        
+        $req->execute(array($Nom, $Mdp));
+
+        if($req->rowCount()==1)
+        {
+            $data = $req->fetch();
+
+            return $data;
+
+        } else {
+            return false;
+        }
+        $req->closeCursor();
+    }
+}
 
 // get l'admin lors de la connection
 function getAdmin($email, $motdepasse){
@@ -66,7 +86,7 @@ function getAdmin($email, $motdepasse){
 
 function ajouter($IDcd, $nomCD, $dateSortie, $imagePochette, $prix){
     if(require("connection.php")){
-        $req = $access->prepare("INSERT INTO cd (IDcd, nomCD, dateSortie, imagePochette, prix) VALUES (?, ?, ?, ?, ?)");
+        $req = $access->prepare("INSERT INTO Vinyle (IdVinyle, Nom, Label, Annee, Description, IdArtiste) VALUES (?, ?, ?, ?, ?, ?)");
         
         $req->execute(array($IDcd, $nomCD, $dateSortie, $imagePochette, $prix));
 
@@ -143,15 +163,12 @@ function afficher(){
 }
 
 
-// supprimer le cd
 function supprimer($IDcd){
     if(require("connection.php")){
         // Pour l'instant problème de structure de bd, obligation de supprimer l'artiste en meme temps que le cd
-        $req = $access->prepare("DELETE FROM auteur WHERE ID = ?;");
-        $req2 = $access->prepare("DELETE FROM cd WHERE IDcd =? ;");
+        $req = $access->prepare("DELETE FROM Vinyle WHERE ID = ?;");
 
         $req->execute(array($IDcd));
-        $req2->execute(array($IDcd));
     }
 }
 
