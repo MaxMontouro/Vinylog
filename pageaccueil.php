@@ -217,7 +217,7 @@ require("config/commandes.php");
                 <a href="pageartiste.php?<?php echo http_build_query($idUrlArtiste, '', '&')?>">
                   <div class="card">
                     <div class="card-img">
-                        <img src="./img/pochettes/<?php echo $artiste->IdArtiste?>.png" class="img-fluid">
+                        <img src="./img/artistes/<?php echo $artiste->IdArtiste?>.png" class="img-fluid">
                     </div>
                     <div class="card-text mt-2 text-center">
                       <h5 class="card-title"><?php echo utf8_encode($artiste->Nom)?></h5>
