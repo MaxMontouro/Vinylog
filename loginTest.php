@@ -175,7 +175,7 @@ if(isset($_SESSION['test'])){
             <div class="form signinform">
                 <form method="post">
                     <h3>Se connecter</h3>
-                    <label for="Nom" class="form-label">Adresse Email</label>
+                    <label for="Nom" class="form-label">Nom</label>
                     <input class="form-control" name ="Nom">
                     <label for="Mdp" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" name ="Mdp">
@@ -208,16 +208,6 @@ if(isset($_POST['envoyer'])){
         $Mdp = htmlspecialchars($_POST['Mdp']);
 
         $user = getUtilisateur($Nom, $Mdp);
-
-        $userAdmin = getAdmin($Nom, $Mdp);
-
-
-        if($userAdmin){
-            $_SESSION['test'] = $user;
-            header("Location: admin/index.php");
-            exit();
-        }
-        
 
         if($user){
             $_SESSION['test'] = $user;

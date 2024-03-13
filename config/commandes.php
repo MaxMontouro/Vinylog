@@ -58,27 +58,6 @@ function getUtilisateur($Nom, $Mdp){
     }
 }
 
-// get l'admin lors de la connection
-function getAdmin($email, $motdepasse){
-
-    if(require("connection.php"))
-    {
-        $req = $access->prepare("SELECT * FROM admin WHERE email = ? AND motdepasse = ?");
-        
-        $req->execute(array($email, $motdepasse));
-
-        if($req->rowCount()==1)
-        {
-            $data = $req->fetch();
-
-            return $data;
-
-        } else {
-            return false;
-        }
-        $req->closeCursor();
-    }
-}
 
 
 
