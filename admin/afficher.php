@@ -3,10 +3,10 @@
 session_start();
 
 if(!isset($_SESSION['test'])){
-    header("Location: ../login.php");
+    header("Location: ../loginTest.php");
 }
 if(empty($_SESSION['test'])){
-    header("Location: ../login.php");
+    header("Location: ../loginTest.php");
 }
 
 
