@@ -231,3 +231,14 @@
 .favorite-icon[data-favorite="true"] img {
     transform: scale(0.8); /* Réduire légèrement la taille de l'image pour donner un effet visuel */
 }
+
+
+
+/* -------------------- Page afficher articles -------------------- */
+  .tableauPanier {
+    border-radius: 25px; 
+    overflow: hidden; 
+    border: 1px black solid; 
+    display:flex;
+    vertical-align: middle;
+  }
