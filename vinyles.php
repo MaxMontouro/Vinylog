@@ -27,30 +27,11 @@ session_start();
     <link rel="stylesheet" href="./styleFooter.css">
 
     <style>
-      .card {
-    width: 250px; /* Largeur fixe pour toutes les cartes */
-    height: 350px; /* Hauteur fixe pour toutes les cartes */
-}
-.favorite-icon {
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        outline: none;
-        position: relative;
-    }
-
-    .favorite-icon img {
-        width: 30px;
-        height: 30px;
-        transition: transform 0.3s ease;
-    }
-
-    .favorite-icon[data-favorite="true"] img {
-        transform: scale(0.8); /* Réduire légèrement la taille de l'image pour donner un effet visuel */
-    }
-
-      </style>
+        .card {
+      width: 250px; /* Largeur fixe pour toutes les cartes */
+      height: 350px; /* Hauteur fixe pour toutes les cartes */
+      }
+    </style>
   </head>
 <body>
   
@@ -185,7 +166,12 @@ session_start();
               ?>
 
 <!-- Afficher les vinyles filtrés ou tous les vinyles si aucune recherche n'a été effectuée -->
-<?php foreach ($filtered_cds as $cd): ?>
+<?php 
+  $favoris = favorisUtilisateur('Utilisateur'); // ID A CHANGER
+  $idsVinyle = array_column($favoris, 'IdVinyle');
+
+  foreach ($filtered_cds as $cd):
+  ?>
     <div class="col">
         <div class="card shadow-sm" style="width: 17rem;">
             <title><?= $cd->Nom ?></title>
@@ -193,7 +179,8 @@ session_start();
             <div class="card-body">
                 <h5 class="card-title"><?= $cd->nomVinyle ?></h5>
                 <h6 class="card-title"><?= $cd->Nom ?></h6>
-                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;" data-favorite="false">
+                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;"
+                data-favorite="<?= json_encode(in_array($cd->IdVinyle, $idsVinyle)); ?>" data-vinyle-id="<?= htmlspecialchars($cd->IdVinyle) ?>">
                     <img src="./img/favWhite.png">
                 </button>
             </div>
@@ -202,23 +189,62 @@ session_start();
 <?php endforeach; ?>
 
 <script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+    favoriteIcons.forEach(icon => {
+      if (icon.getAttribute('data-favorite') === 'true') {
+        icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+
+
+      }
+
+              
+        
+           
+    });
+  });
+
+
     document.addEventListener("DOMContentLoaded", function() {
         const favoriteIcons = document.querySelectorAll('.favorite-icon');
 
         favoriteIcons.forEach(icon => {
             icon.addEventListener('click', function() {
+              const vinyleId = icon.getAttribute('data-vinyle-id'); 
+
                 if (icon.getAttribute('data-favorite') === 'false') {
                     icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
                     icon.setAttribute('data-favorite', 'true');
+
+                    fetch(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                    });
+                    console.log("testvrai");
+
+                    console.log(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId));
+
                 } else {
                     icon.querySelector('img').src = './img/favWhite.png'; // Changer l'image en blanc
                     icon.setAttribute('data-favorite', 'false');
+
+                    fetch(`./config/commandes.php?action=retirerVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                    });
+                    console.log("testfaux");
                 }
+
+              
+        
             });
         });
     });
 </script>
-
 
 
 
