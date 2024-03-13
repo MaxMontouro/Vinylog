@@ -3,16 +3,16 @@
 session_start();
 
 if(!isset($_SESSION['test'])){
-    header("Location: ../login.php");
+    header("Location: ../loginTest.php");
 }
 if(empty($_SESSION['test'])){
-    header("Location: ../login.php");
+    header("Location: ../loginTest.php");
 }
 
 
 require("../config/commandes.php");
 
-$cds = afficher();
+$cds = afficherAll();
 
 ?>
 
@@ -25,9 +25,6 @@ $cds = afficher();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <title>Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap">
 
@@ -144,13 +141,7 @@ $cds = afficher();
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-<form method="post">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">ID du CD</label>
-    <input type="name" class="form-control" name ="idDuCd" required>
-  </div>
-  <button type="submit" name ="valider" class="btn btn-warning">Supprimer le CD</button>
-</form>
+
 
 </div>
 
@@ -161,8 +152,15 @@ $cds = afficher();
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
-              <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><img src="<?= $cd->url ?>" style="width: 50%"><p><?= $cd->nomVinyle ?></p><p><?= $cd->Nom ?></p></strong>
+              <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><img src="<?= $cd->url ?>" style="width: 50%"><p><?= $cd->NomVinyle ?></p><p><?= $cd->Nom ?></p></strong>
               <div class="d-flex justify-content-between align-items-center">
+              </div>
+              <form method="post">
+                <div class="mb-3">
+                  <input type="hidden" class="form-control" name ="idDuCd" value ="<?= $cd->IdVinyle ?>">
+                </div>
+                <button type="submit" name ="valider" class="btn btn-warning">Supprimer le CD</button>
+              </form>
               </div>
             </div>
           </div>
@@ -186,6 +184,9 @@ if(isset($_POST['valider'])){
 
             try{
                 supprimer($IDcd);
+
+                header("Location: " . $_SERVER["PHP_SELF"]);
+                exit();
             } catch (Exception $e){
                 $e->getMessage();
             }

@@ -141,6 +141,24 @@ function afficher(){
     return $data;
 }
 
+// affichage des cds
+function afficherAll(){
+    $data = [];
+    if(require("connection.php")){
+        $req = $access->prepare("SELECT Nom AS NomVinyle, IdVinyle FROM Vinyle");
+
+        $req->execute();
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+
+
+        $req->closeCursor();
+
+    }
+    return $data;
+}
+
+
 
 function supprimer($IDcd){
     if(require("connection.php")){
