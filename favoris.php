@@ -7,6 +7,8 @@ $idUtilisateur = "Utilisateur";
 
 $vinylesFav = favorisUtilisateur($idUtilisateur);
 
+$idsVinyle = array_column($vinylesFav, 'IdVinyle');
+
 ?>
 
 
@@ -171,7 +173,10 @@ $vinylesFav = favorisUtilisateur($idUtilisateur);
             <div class="card-body">
                 <h5 class="card-title"><?= $vinyle->NomVinyle ?></h5>
                 <h6 class="card-title"><?= $vinyle->NomArtiste ?></h6>
-                <span class="material-symbols-outlined" style="position: absolute; bottom: 10px; right: 10px;  font-size: 30px;">favorite</span>
+                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;"
+                data-favorite="<?= json_encode(in_array($vinyle->IdVinyle, $idsVinyle)); ?>" data-vinyle-id="<?= htmlspecialchars($vinyle->IdVinyle) ?>">
+                    <img src="./img/favWhite.png">
+                </button>
             </div>
         </div>
     </div>
@@ -181,8 +186,62 @@ $vinylesFav = favorisUtilisateur($idUtilisateur);
   else { ?>
   <h3>Aucun vinyle en favori</h3>
 
-
   <?php } ?>
+
+  <script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+    favoriteIcons.forEach(icon => {
+      if (icon.getAttribute('data-favorite') === 'true') {
+        icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+
+      }
+           
+    });
+  });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+        favoriteIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+              const vinyleId = icon.getAttribute('data-vinyle-id'); 
+
+                if (icon.getAttribute('data-favorite') === 'false') {
+                    icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
+                    icon.setAttribute('data-favorite', 'true');
+
+                    fetch(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                    });
+                    console.log("testvrai");
+
+                    console.log(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId));
+
+                } else {
+                    icon.querySelector('img').src = './img/favWhite.png'; // Changer l'image en blanc
+                    icon.setAttribute('data-favorite', 'false');
+
+                    fetch(`./config/commandes.php?action=retirerVinyleFav-`+encodeURIComponent(vinyleId))
+                    
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                    });
+                    
+                    location.reload();
+                }
+
+              
+        
+            });
+        });
+    });
+</script>
 
 
 
