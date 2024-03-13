@@ -2,9 +2,8 @@
 require("config/commandes.php");
 
 $cds = afficher();
-
+session_start();
 ?>
-
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -31,8 +30,25 @@ $cds = afficher();
       .card {
     width: 250px; /* Largeur fixe pour toutes les cartes */
     height: 350px; /* Hauteur fixe pour toutes les cartes */
+}
+.favorite-icon {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        position: relative;
     }
 
+    .favorite-icon img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .favorite-icon[data-favorite="true"] img {
+        transform: scale(0.8); /* Réduire légèrement la taille de l'image pour donner un effet visuel */
+    }
 
       </style>
   </head>
@@ -71,7 +87,7 @@ $cds = afficher();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item me-3">
-                <a class="nav-link text-dark" href="">Compte</a>
+                <a class="nav-link text-dark" href="loginTest.php">Compte</a>
             </li>
             <li class="nav-item me-3">
                 <a class="nav-link text-dark" href="">Favoris</a>
@@ -94,18 +110,10 @@ $cds = afficher();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark" aria-current="page" href="#">Accueil</a>
+          <a class="nav-link text-dark" aria-current="page" href="pageaccueil.php">Accueil</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Vinyles
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Truc 1</a></li>
-            <li><a class="dropdown-item" href="#">Truc 2</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link text-dark" aria-current="page" href="vinyles.php">Vinyles</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" aria-current="page" href="#">Ventes</a>
@@ -139,15 +147,15 @@ $cds = afficher();
             <!-- Utilisation de cases à cocher pour les catégories -->
             <div class="form-check" style="margin-bottom: 10px;">
               <input class="form-check-input" type="checkbox" value="" id="categorie1">
-              <label class="form-check-label" for="categorie1" style="color: white; font-size: 16px;">Catégorie 1</label>
+              <label class="form-check-label" for="categorie1" style="color: white; font-size: 16px;">Pop</label>
             </div>
             <div class="form-check" style="margin-bottom: 10px;">
               <input class="form-check-input" type="checkbox" value="" id="categorie2">
-              <label class="form-check-label" for="categorie2" style="color: white; font-size: 16px;">Catégorie 2</label>
+              <label class="form-check-label" for="categorie2" style="color: white; font-size: 16px;">Rap</label>
             </div>
             <div class="form-check" style="margin-bottom: 10px;">
               <input class="form-check-input" type="checkbox" value="" id="categorie3">
-              <label class="form-check-label" for="categorie3" style="color: white; font-size: 16px;">Catégorie 3</label>
+              <label class="form-check-label" for="categorie3" style="color: white; font-size: 16px;">Classique</label>
             </div>
             <!-- Ajoutez d'autres catégories si nécessaire -->
           </div>
@@ -177,16 +185,7 @@ $cds = afficher();
               ?>
 
 <!-- Afficher les vinyles filtrés ou tous les vinyles si aucune recherche n'a été effectuée -->
-<?php
-  $favoris = favorisUtilisateur('Utilisateur'); // ID A CHANGER
-  $idsVinyle = array_column($favoris, 'IdVinyle');
-
-  // echo "<p>".print_r($idsVinyle)."</p>";
-  
-  foreach ($filtered_cds as $cd): 
-  
-  
-  ?>
+<?php foreach ($filtered_cds as $cd): ?>
     <div class="col">
         <div class="card shadow-sm" style="width: 17rem;">
             <title><?= $cd->Nom ?></title>
@@ -194,8 +193,7 @@ $cds = afficher();
             <div class="card-body">
                 <h5 class="card-title"><?= $cd->nomVinyle ?></h5>
                 <h6 class="card-title"><?= $cd->Nom ?></h6>
-                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;"
-                data-favorite="<?= json_encode(in_array($cd->IdVinyle, $idsVinyle)); ?>" data-vinyle-id="<?= htmlspecialchars($cd->IdVinyle) ?>">
+                <button class="material-symbols-outlined favorite-icon" style="position: absolute; bottom: 10px; right: 10px; font-size: 30px; cursor: pointer;" data-favorite="false">
                     <img src="./img/favWhite.png">
                 </button>
             </div>
@@ -204,58 +202,18 @@ $cds = afficher();
 <?php endforeach; ?>
 
 <script>
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const favoriteIcons = document.querySelectorAll('.favorite-icon');
-
-    favoriteIcons.forEach(icon => {
-      if (icon.getAttribute('data-favorite') === 'true') {
-        icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
-
-
-      }
-
-              
-        
-           
-    });
-  });
-
-
     document.addEventListener("DOMContentLoaded", function() {
         const favoriteIcons = document.querySelectorAll('.favorite-icon');
 
         favoriteIcons.forEach(icon => {
             icon.addEventListener('click', function() {
-              const vinyleId = icon.getAttribute('data-vinyle-id'); 
-
                 if (icon.getAttribute('data-favorite') === 'false') {
                     icon.querySelector('img').src = './img/favBlack.png'; // Changer l'image en noir
                     icon.setAttribute('data-favorite', 'true');
-
-                    fetch(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId))
-                    
-                    .catch(error => {
-                        console.error('Erreur:', error);
-                    });
-                    console.log("testvrai");
-
-                    console.log(`./config/commandes.php?action=ajoutVinyleFav-`+encodeURIComponent(vinyleId));
-
                 } else {
                     icon.querySelector('img').src = './img/favWhite.png'; // Changer l'image en blanc
                     icon.setAttribute('data-favorite', 'false');
-
-                    fetch(`./config/commandes.php?action=retirerVinyleFav-`+encodeURIComponent(vinyleId))
-                    
-                    .catch(error => {
-                        console.error('Erreur:', error);
-                    });
-                    console.log("testfaux");
                 }
-
-              
-        
             });
         });
     });
@@ -276,13 +234,12 @@ $cds = afficher();
   <div class="rowF">
       <div class="colF">
           <img src="img/logoWhite.png" class="logoF">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate facere minus voluptatibus sunt inventore perspiciatis! Quis illo eum suscipit quibusdam, sapiente commodi quam, facere non vero beatae quasi ratione omnis.</p>
+          <p>Inscrivez vous à notre Newsletter pour recevoir les dernières infos de Vinylog.</p>
       </div>
       <div class="colF">
-          <h3>BLABLA <div class="underline"><span></span></div></h3>
-          <p>blaaaaaaaaaaa</p>
+          <h3>Coordonnées<div class="underline"><span></span></div></h3>
           <p>Bayonne, France</p>
-          <p>200 a2sa2s 56a5s</p>
+          <p>1 rue des potiers chepa</p>
           <p class="email-id">Vinylog64@gmail.com</p>
       </div>
       <div class="colF">
@@ -291,7 +248,6 @@ $cds = afficher();
               <li><a href="pageaccueil.php">Accueil</a></li>
               <li><a href="poldeconf.html">Politique de confidentialité</a></li>
               <li><a href="">A propos</a></li>
-              <li><a href="">Contacts</a></li>
           </ul>
       </div>
       <div class="colF">
