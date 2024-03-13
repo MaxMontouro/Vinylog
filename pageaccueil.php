@@ -201,6 +201,8 @@ require("config/commandes.php");
 
             $data = carrouselArtiste();
 
+            $cpt = 0;
+
             foreach ($data as $artiste) {
 
               $idUrlArtiste = array( 
@@ -209,7 +211,8 @@ require("config/commandes.php");
                 
             ?>
 
-            <div class="carousel-item active justify-content-center">
+            <div class="carousel-item <?php if($cpt < 1){echo "active";
+              $cpt = $cpt + 1;}?> justify-content-center">
               <div class="col-sm-2-5">
                 <a href="pageartiste.php?<?php echo http_build_query($idUrlArtiste, '', '&')?>">
                   <div class="card">
