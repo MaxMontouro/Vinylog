@@ -29,6 +29,7 @@ else {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />    
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styleFooter.css">
 
     
   </head>
@@ -257,6 +258,40 @@ else {
 
    
 
+      <footer>
+  <div class="rowF">
+      <div class="colF">
+          <img src="img/logoWhite.png" class="logoF">
+          <p>Inscrivez vous à notre Newsletter pour recevoir les dernières infos de Vinylog.</p>
+      </div>
+      <div class="colF">
+          <h3>Coordonnées<div class="underline"><span></span></div></h3>
+          <p>Bayonne, France</p>
+          <p>1 rue des potiers chepa</p>
+          <p class="email-id">Vinylog64@gmail.com</p>
+      </div>
+      <div class="colF">
+          <h3>Liens<div class="underline"><span></span></h3>
+          <ul>
+              <li><a href="pageaccueil.php">Accueil</a></li>
+              <li><a href="poldeconf.html">Politique de confidentialité</a></li>
+              <li><a href="">A propos</a></li>
+          </ul>
+      </div>
+      <div class="colF">
+          <h3>Newsletter <div class="underline"><span></span></h3>
+          <form class="test">
+              <i class="fa-regular fa-envelope" style="width: 30px;"></i><input type="email" placeholder="Entrer votre email">
+              <button type="submit"><i class="fa-solid fa-share"></i></button>
+          </form>
+          <div class="social-icons">
+              <i class="fa-brands fa-github" onclick=""></i>
+          </div>
+      </div>
+  </div>
+  <hr>
+  <p class="copyright"copyright>Copyright 2024 © Vinylog. Tout droit réservés.</p>
+</footer>
 
 
     </main>
