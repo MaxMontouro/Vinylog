@@ -86,16 +86,16 @@ require("../config/commandes.php");
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark" aria-current="page" href="pageaccueil.php">Accueil</a>
+          <a class="nav-link text-dark" aria-current="page" href="../pageaccueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" aria-current="page" href="vinyles.php">Vinyles</a>
+          <a class="nav-link text-dark" aria-current="page" href="../vinyles.php">Vinyles</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" aria-current="page" href="#">Ventes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#">Conseil&Guide</a>
+          <a class="nav-link text-dark" href="../conseils.html">Conseil&Guide</a>
         </li>
       </ul>
     </div>
