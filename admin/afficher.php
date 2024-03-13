@@ -161,7 +161,7 @@ $cds = afficher();
     <tr>
       <th scope="row"><?= $cd->IdVinyle ?></th>
       <td>
-        <img src="<?= $cd->url ?>" style="width: 20%">
+        <img src="<?= $cd->Url ?>" style="width: 20%">
       </td>
       <td><?= $cd->Nom ?></td>
       <td><?= $cd->nomVinyle ?></td>

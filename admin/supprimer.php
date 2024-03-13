@@ -12,7 +12,7 @@ if(empty($_SESSION['test'])){
 
 require("../config/commandes.php");
 
-$cds = afficherAll();
+$cds = afficher();
 
 ?>
 
@@ -146,26 +146,31 @@ $cds = afficherAll();
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+<style>
+  .cd-image {
+  width: 200px; /* Changer 200px à la taille souhaitée */
+  height: auto; /* Pour conserver les proportions de l'image */
+}
+</style>
 
 <?php foreach($cds as $cd): ?>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><img src="<?= $cd->url ?>" style="width: 50%"><p><?= $cd->NomVinyle ?></p><p><?= $cd->Nom ?></p></strong>
-              <div class="d-flex justify-content-between align-items-center">
-              </div>
-              <form method="post">
-                <div class="mb-3">
-                  <input type="hidden" class="form-control" name ="idDuCd" value ="<?= $cd->IdVinyle ?>">
-                </div>
-                <button type="submit" name ="valider" class="btn btn-warning">Supprimer le CD</button>
-              </form>
-              </div>
-            </div>
-          </div>
+  <div class="col">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <p class="card-text"><strong><p><?= $cd->IdVinyle ?></p><img src="<?= $cd->Url ?>" class="cd-image" alt="<?= $cd->nomVinyle ?>"><p><?= $cd->nomVinyle ?></p><p><?= $cd->Nom ?></p></strong>
+        <div class="d-flex justify-content-between align-items-center">
         </div>
-      <?php endforeach; ?>
+        <form method="post">
+          <div class="mb-3">
+            <input type="hidden" class="form-control" name ="idDuCd" value ="<?= $cd->IdVinyle ?>">
+          </div>
+          <button type="submit" name ="valider" class="btn btn-warning">Supprimer le CD</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<?php endforeach; ?>
+
 </div>
 
 
