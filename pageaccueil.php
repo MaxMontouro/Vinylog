@@ -53,7 +53,7 @@ require("config/commandes.php");
       <div>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
-          <a href="index.php">
+          <a href="pageaccueil.php">
             <img src="./img/logo.png" width="120" height="120" style="margin-right: 20px;">
           </a>
           <div id="menu-complet">
@@ -69,7 +69,7 @@ require("config/commandes.php");
                         <a class="nav-link text-dark" href="loginTest.php">Compte</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link text-dark" href="">Favoris</a>
+                        <a class="nav-link text-dark" href="favoris.php">Favoris</a>
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link text-dark" href="">Panier</a>

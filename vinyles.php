@@ -175,7 +175,7 @@ session_start();
     <div class="col">
         <div class="card shadow-sm" style="width: 17rem;">
             <title><?= $cd->Nom ?></title>
-            <img src="<?= $cd->Url ?>" class="card-img-top vinyle-image" alt="<?= $cd->Nom ?>">
+            <img src="./img/pochettes/<?php echo $cd->IdVinyle?>.png" class="card-img-top vinyle-image" alt="<?= $cd->Nom ?>">
             <div class="card-body">
                 <h5 class="card-title"><?= $cd->nomVinyle ?></h5>
                 <h6 class="card-title"><?= $cd->Nom ?></h6>
@@ -264,8 +264,8 @@ session_start();
       </div>
       <div class="colF">
           <h3>Coordonnées<div class="underline"><span></span></div></h3>
-          <p>Anglet, France</p>
-          <p>2 Allée du Parc Montaury</p>
+          <p>Bayonne, France</p>
+          <p>1 rue des potiers chepa</p>
           <p class="email-id">Vinylog64@gmail.com</p>
       </div>
       <div class="colF">
@@ -290,5 +290,6 @@ session_start();
   <hr>
   <p class="copyright"copyright>Copyright 2024 © Vinylog. Tout droit réservés.</p>
 </footer>
+
     </body>
 </html>

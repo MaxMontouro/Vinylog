@@ -1,9 +1,9 @@
 <?php
 
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
-$dbname = 'earbelbide_bd';
-$user = 'earbelbide_bd';
-$password = 'earbelbide_bd';
+$dbname = 'earbelbide_pro';
+$user = 'earbelbide_pro';
+$password = 'earbelbide_pro';
 
 try {
     $access = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
